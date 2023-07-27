@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 让下面的代码成立, 结构的原理就是对象是可迭代对象即可， 即给对象原型添加symbol.iterator
+    Object.prototype[Symbol.iterator] = function* () {
+        return yield* Object.values(this);
+    }
+    Object.prototype[Symbol.iterator] = function () {
+        return Object.values(this)[Symbol.iterator]();
+    }
+    var [a,b] =  {a: 1, b: 2}
+    console.log(a, b, 'ab')
+    // const aar = {a: 1, b:2 , c: 5, d: 3}
+    // console.log(Object.values(aar), 'arr')
+
+
+    // var arr = [1,2,3];
+    // var [a,b] = arr;
+    // const iter = arr[Symbol.iterator]();
+    // var a = iter.next().value;
+    // var b = iter.next().value;
+    // console.log(arr[Symbol.iterator](), iter.next, a,b)
+</script>
+</html>
